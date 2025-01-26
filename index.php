@@ -128,7 +128,9 @@ while ($row = $result->fetch_assoc()) {
                         <td class="px-4 py-2 border-b text-center"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b text-center"><?= htmlspecialchars($row['tadarus']) ?></td>
                         <td class="px-4 py-2 border-b text-center"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b text-center"><?= htmlspecialchars($row['catatan']) ?></td>
+                        <td class="px-4 py-2 border-b text-center" title="<?= htmlspecialchars($row['catatan']) ?>">
+                            <?= strlen($row['catatan']) > 20 ? htmlspecialchars(substr($row['catatan'], 0, 20)) . '...' : htmlspecialchars($row['catatan']) ?>
+                        </td>
                         <td class="px-4 py-2 border-b text-center">
                             <a href="./pages/edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
                                 <i class="fas fa-edit"></i>
