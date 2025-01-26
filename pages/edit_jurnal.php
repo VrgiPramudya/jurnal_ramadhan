@@ -35,31 +35,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Edit Jurnal Ramadhan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Edit Jurnal Ramadhan</h1>
-    <a href="index.php">Kembali</a>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white p-6">
+            <h1 class="text-2xl font-semibold mb-6">Jurnal Ramadhan</h1>
+            <div class="space-y-4">
+                <a href="tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
+                <a href="logout.php" class="block text-gray-300 hover:text-white">Logout</a>
+            </div>
+        </div>
 
-    <?php if (isset($message)) echo "<p>$message</p>"; ?>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
-    <form method="POST" action="">
-        <label>Tanggal: <input type="date" name="tanggal" value="<?= $record['tanggal'] ?>" required></label><br><br>
+            <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Edit Jurnal Ramadhan</h2>
 
-        <label><input type="checkbox" name="subuh" <?= $record['subuh'] ? 'checked' : '' ?>> Sholat Subuh</label><br>
-        <label><input type="checkbox" name="dzuhur" <?= $record['dzuhur'] ? 'checked' : '' ?>> Sholat Dzuhur</label><br>
-        <label><input type="checkbox" name="ashar" <?= $record['ashar'] ? 'checked' : '' ?>> Sholat Ashar</label><br>
-        <label><input type="checkbox" name="maghrib" <?= $record['maghrib'] ? 'checked' : '' ?>> Sholat Maghrib</label><br>
-        <label><input type="checkbox" name="isya" <?= $record['isya'] ? 'checked' : '' ?>> Sholat Isya</label><br><br>
+            <?php if (isset($message)) echo "<p class='mt-4 text-red-600'>$message</p>"; ?>
 
-        <label>Tadarus (halaman): <input type="number" name="tadarus" min="0" value="<?= $record['tadarus'] ?>"></label><br><br>
+            <form method="POST" action="" class="space-y-4">
+                <!-- Tanggal Input -->
+                <label class="block text-gray-700">Tanggal: 
+                    <input type="date" name="tanggal" value="<?= htmlspecialchars($record['tanggal']) ?>" required class="w-full p-2 border border-gray-300 rounded-md">
+                </label>
 
-        <label><input type="checkbox" name="puasa" <?= $record['puasa'] ? 'checked' : '' ?>> Puasa</label><br><br>
+                <!-- Sholat Checkboxes -->
+                <div class="space-y-2">
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="subuh" <?= $record['subuh'] ? 'checked' : '' ?> class="form-checkbox">
+                        <span class="ml-2">Sholat Subuh</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="dzuhur" <?= $record['dzuhur'] ? 'checked' : '' ?> class="form-checkbox">
+                        <span class="ml-2">Sholat Dzuhur</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="ashar" <?= $record['ashar'] ? 'checked' : '' ?> class="form-checkbox">
+                        <span class="ml-2">Sholat Ashar</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="maghrib" <?= $record['maghrib'] ? 'checked' : '' ?> class="form-checkbox">
+                        <span class="ml-2">Sholat Maghrib</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="isya" <?= $record['isya'] ? 'checked' : '' ?> class="form-checkbox">
+                        <span class="ml-2">Sholat Isya</span>
+                    </label>
+                </div>
 
-        <label>Catatan: <textarea name="catatan"><?= $record['catatan'] ?></textarea></label><br><br>
+                <!-- Tadarus Input -->
+                <label class="block text-gray-700">Tadarus (halaman): 
+                    <input type="number" name="tadarus" min="0" value="<?= htmlspecialchars($record['tadarus']) ?>" class="w-full p-2 border border-gray-300 rounded-md">
+                </label>
 
-        <button type="submit">Simpan</button>
-    </form>
+                <!-- Puasa Checkbox -->
+                <label class="inline-flex items-center text-gray-700">
+                    <input type="checkbox" name="puasa" <?= $record['puasa'] ? 'checked' : '' ?> class="form-checkbox">
+                    <span class="ml-2">Puasa</span>
+                </label>
+
+                <!-- Catatan Textarea -->
+                <label class="block text-gray-700">Catatan: 
+                    <textarea name="catatan" class="w-full p-2 border border-gray-300 rounded-md"><?= htmlspecialchars($record['catatan']) ?></textarea>
+                </label>
+
+                <!-- Submit Button -->
+                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">Simpan</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

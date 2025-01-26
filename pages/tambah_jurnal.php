@@ -32,29 +32,81 @@ $result = $conn->query("SELECT * FROM ibadah_harian WHERE user_id = {$_SESSION['
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jurnal Ramadhan</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
-    <h1>Selamat datang, <?= $_SESSION['username'] ?>!</h1>
-    <a href="logout.php">Logout</a>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white p-6">
+            <h1 class="text-2xl font-semibold mb-6">Jurnal Ramadhan</h1>
+            <div class="space-y-4">
+                <a href="tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
+                <a href="logout.php" class="block text-gray-300 hover:text-white">Logout</a>
+            </div>
+        </div>
 
-    <?php if (isset($message)) echo "<p>$message</p>"; ?>
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <?php if (isset($message)) echo "<p class='mt-4 text-green-600'>$message</p>"; ?>
 
-    <h2>Catatan Jurnal Ramadhan</h2>
-    <form method="POST" action="">
-        <label>Tanggal: <input type="date" name="tanggal" required></label><br><br>
+            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
-        <label><input type="checkbox" name="subuh"> Sholat Subuh</label><br>
-        <label><input type="checkbox" name="dzuhur"> Sholat Dzuhur</label><br>
-        <label><input type="checkbox" name="ashar"> Sholat Ashar</label><br>
-        <label><input type="checkbox" name="maghrib"> Sholat Maghrib</label><br>
-        <label><input type="checkbox" name="isya"> Sholat Isya</label><br><br>
+            <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Catat Jurnal Ramadhan</h2>
 
-        <label>Tadarus (halaman): <input type="number" name="tadarus" min="0"></label><br><br>
+            <form method="POST" action="" class="space-y-4">
+                <!-- Tanggal -->
+                <label class="block text-gray-700">
+                    Tanggal:
+                    <input type="date" name="tanggal" required class="w-full p-2 border border-gray-300 rounded-md">
+                </label>
 
-        <label><input type="checkbox" name="puasa"> Puasa</label><br><br>
+                <!-- Sholat Checkbox -->
+                <div class="space-y-2">
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="subuh" class="form-checkbox">
+                        <span class="ml-2">Sholat Subuh</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="dzuhur" class="form-checkbox">
+                        <span class="ml-2">Sholat Dzuhur</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="ashar" class="form-checkbox">
+                        <span class="ml-2">Sholat Ashar</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="maghrib" class="form-checkbox">
+                        <span class="ml-2">Sholat Maghrib</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-700">
+                        <input type="checkbox" name="isya" class="form-checkbox">
+                        <span class="ml-2">Sholat Isya</span>
+                    </label>
+                </div>
 
-        <label>Catatan: <textarea name="catatan"></textarea></label><br><br>
+                <!-- Tadarus -->
+                <label class="block text-gray-700">
+                    Tadarus (halaman):
+                    <input type="number" name="tadarus" min="0" class="w-full p-2 border border-gray-300 rounded-md">
+                </label>
 
-        <button type="submit">Simpan</button>
-    </form>
+                <!-- Puasa Checkbox -->
+                <label class="inline-flex items-center text-gray-700">
+                    <input type="checkbox" name="puasa" class="form-checkbox">
+                    <span class="ml-2">Puasa</span>
+                </label>
+
+                <!-- Catatan -->
+                <label class="block text-gray-700">
+                    Catatan:
+                    <textarea name="catatan" class="w-full p-2 border border-gray-300 rounded-md"></textarea>
+                </label>
+
+                <!-- Submit -->
+                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">Simpan</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
