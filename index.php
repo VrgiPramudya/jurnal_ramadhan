@@ -105,31 +105,31 @@ while ($row = $result->fetch_assoc()) {
             <table class="min-w-full bg-white border border-gray-200 rounded-md shadow-md">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Tanggal</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Subuh</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Dzuhur</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Ashar</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Maghrib</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Isya</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Tadarus</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Puasa</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Catatan</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Aksi</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Tanggal</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Subuh</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Dzuhur</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Ashar</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Maghrib</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Isya</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Tadarus</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Puasa</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Catatan</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($journals as $row): ?>
                     <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['tanggal']) ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['subuh'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['dzuhur'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['ashar'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['maghrib'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['tadarus']) ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['catatan']) ?></td>
-                        <td class="px-4 py-2 border-b">
+                        <td class="px-4 py-2 border-b text-center" ><?= htmlspecialchars($row['tanggal']) ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['subuh'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['dzuhur'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['ashar'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['maghrib'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= htmlspecialchars($row['tadarus']) ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= htmlspecialchars($row['catatan']) ?></td>
+                        <td class="px-4 py-2 border-b text-center">
                             <a href="./pages/edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
                                 <i class="fas fa-edit"></i>
                             </a>
