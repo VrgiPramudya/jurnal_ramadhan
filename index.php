@@ -21,7 +21,7 @@ $total_sholat_maghrib = 0;
 $total_sholat_isya = 0;
 
 $total_puasa = 0;
-$total_tadarus = 0;
+$total_tarawih = 0;
 $total_hari = 0;
 
 $journals = []; // Simpan data jurnal dalam array
@@ -34,7 +34,7 @@ while ($row = $result->fetch_assoc()) {
     $total_sholat_maghrib += $row['maghrib'];
     $total_sholat_isya += $row['isya'];
     $total_puasa += $row['puasa'];
-    $total_tadarus += $row['tadarus'];
+    $total_tarawih += $row['tarawih'];
 }
 
 ?>
@@ -95,8 +95,8 @@ while ($row = $result->fetch_assoc()) {
                     <p class="text-3xl font-bold text-gray-900"><?= $total_puasa ?></p>
                 </div>
                 <div class="bg-white p-6 shadow rounded-lg">
-                    <h2 class="text-lg font-semibold text-gray-700">Tadarus</h2>
-                    <p class="text-3xl font-bold text-gray-900"><?= $total_tadarus ?> halaman</p>
+                    <h2 class="text-lg font-semibold text-gray-700">Tarawih</h2>
+                    <p class="text-3xl font-bold text-gray-900"><?= $total_tarawih ?></p>
                 </div>
             </div>
 
@@ -111,7 +111,7 @@ while ($row = $result->fetch_assoc()) {
                         <th class="px-4 py-2 border-b text-center text-gray-600">Ashar</th>
                         <th class="px-4 py-2 border-b text-center text-gray-600">Maghrib</th>
                         <th class="px-4 py-2 border-b text-center text-gray-600">Isya</th>
-                        <th class="px-4 py-2 border-b text-center text-gray-600">Tadarus</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Tarawih</th>
                         <th class="px-4 py-2 border-b text-center text-gray-600">Puasa</th>
                         <th class="px-4 py-2 border-b text-center text-gray-600">Catatan</th>
                         <th class="px-4 py-2 border-b text-center text-gray-600">Aksi</th>
@@ -126,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
                         <td class="px-4 py-2 border-b text-center"><?= $row['ashar'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b text-center"><?= $row['maghrib'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b text-center"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b text-center"><?= htmlspecialchars($row['tadarus']) ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['tarawih'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b text-center"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b text-left" title="<?= htmlspecialchars($row['catatan']) ?>">
                             <?= strlen($row['catatan']) > 20 ? htmlspecialchars(substr($row['catatan'], 0, 20)) . '...' : htmlspecialchars($row['catatan']) ?>
