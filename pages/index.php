@@ -54,7 +54,7 @@ while ($row = $result->fetch_assoc()) {
             <h1 class="text-2xl font-semibold mb-6">Jurnal Ramadhan</h1>
             <div class="space-y-4">
                 <a href="tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
-                <a href="logout.php" class="block text-gray-300 hover:text-white">Logout</a>
+                <a href="../auth/logout.php" class="block text-gray-300 hover:text-white">Logout</a>
             </div>
         </div>
 
