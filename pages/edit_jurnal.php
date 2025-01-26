@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "UPDATE ibadah_harian SET tanggal = '$tanggal', subuh = $subuh, dzuhur = $dzuhur, ashar = $ashar, maghrib = $maghrib, isya = $isya, tadarus = $tadarus, puasa = $puasa, catatan = '$catatan' WHERE id = $id AND user_id = {$_SESSION['user_id']}";
     if ($conn->query($sql)) {
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     } else {
         $message = "Error: " . $conn->error;
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Main Content -->
         <div class="flex-1 p-6">
-            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
+            <a href="../index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
             <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Edit Jurnal Ramadhan</h2>
 

@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header('Location: ../pages/index.php');
+            header('Location: ../index.php');
             exit;
         } else {
             echo "Password salah.";

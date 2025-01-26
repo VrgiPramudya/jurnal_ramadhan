@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES ($user_id, '$tanggal', $subuh, $dzuhur, $ashar, $maghrib, $isya, $tadarus, $puasa, '$catatan')";
     if ($conn->query($sql)) {
         $message = "Data berhasil disimpan!";
-        header('Location: index.php');
+        header('Location: ../index.php');
     } else {
         $message = "Error: " . $conn->error;
     }
@@ -50,7 +50,7 @@ $result = $conn->query("SELECT * FROM ibadah_harian WHERE user_id = {$_SESSION['
         <div class="flex-1 p-6">
             <?php if (isset($message)) echo "<p class='mt-4 text-green-600'>$message</p>"; ?>
 
-            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
+            <a href="../index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
             <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Catat Jurnal Ramadhan</h2>
 

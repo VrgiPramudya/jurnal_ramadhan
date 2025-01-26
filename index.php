@@ -1,12 +1,12 @@
 <?php
-require_once '../config/connection.php';
+require_once './config/connection.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../auth/login.php'); 
+    header('Location: ./auth/login.php'); 
     exit;
 }
 
@@ -53,8 +53,8 @@ while ($row = $result->fetch_assoc()) {
         <div class="w-64 bg-gray-800 text-white p-6">
             <h1 class="text-2xl font-semibold mb-6">Jurnal Ramadhan</h1>
             <div class="space-y-4">
-                <a href="tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
-                <a href="../auth/logout.php" class="block text-gray-300 hover:text-white">Logout</a>
+                <a href="./pages/tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
+                <a href="./auth/logout.php" class="block text-gray-300 hover:text-white">Logout</a>
             </div>
         </div>
 
@@ -130,10 +130,10 @@ while ($row = $result->fetch_assoc()) {
                         <td class="px-4 py-2 border-b"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
                         <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['catatan']) ?></td>
                         <td class="px-4 py-2 border-b">
-                            <a href="edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
+                            <a href="./pages/edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="delete_jurnal.php?delete_id=<?= $row['id'] ?>" onclick="return confirm('Yakin ingin menghapus?');" class="text-red-600 hover:text-red-800">
+                            <a href="./pages/delete_jurnal.php?delete_id=<?= $row['id'] ?>" onclick="return confirm('Yakin ingin menghapus?');" class="text-red-600 hover:text-red-800">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
