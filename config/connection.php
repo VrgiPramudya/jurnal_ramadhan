@@ -1,14 +1,16 @@
 <?php
+session_start();
+
 $host = 'localhost';
 $user = 'root';
 $password = '';
 $dbname = 'jurnal_ramadhan';
+$port = 3306;
 
-$conn = mysqli_connect($host, $user, $password, $dbname);
+$conn = mysqli_connect($host, $user, $password, $dbname, $port);
 
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
 }
 
-session_start();
 ?>

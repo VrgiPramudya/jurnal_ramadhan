@@ -8,16 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ashar = isset($_POST['ashar']) ? 1 : 0;
     $maghrib = isset($_POST['maghrib']) ? 1 : 0;
     $isya = isset($_POST['isya']) ? 1 : 0;
-    $tadarus = isset($_POST['tadarus']) && $_POST['tadarus'] !== '' ? (int)$_POST['tadarus'] : 0;
+    $tarawih = isset($_POST['tarawih']) ? 1 : 0;
     $puasa = isset($_POST['puasa']) ? 1 : 0;
     $catatan = $_POST['catatan'] ?? '';
     $user_id = $_SESSION['user_id'];
 
-    $sql = "INSERT INTO ibadah_harian (user_id, tanggal, subuh, dzuhur, ashar, maghrib, isya, tadarus, puasa, catatan) 
-            VALUES ($user_id, '$tanggal', $subuh, $dzuhur, $ashar, $maghrib, $isya, $tadarus, $puasa, '$catatan')";
+    $sql = "INSERT INTO ibadah_harian (user_id, tanggal, subuh, dzuhur, ashar, maghrib, isya, tarawih, puasa, catatan) 
+            VALUES ($user_id, '$tanggal', $subuh, $dzuhur, $ashar, $maghrib, $isya, $tarawih, $puasa, '$catatan')";
     if ($conn->query($sql)) {
         $message = "Data berhasil disimpan!";
-        header('Location: index.php');
+        header('Location: ../index.php');
     } else {
         $message = "Error: " . $conn->error;
     }
@@ -50,7 +50,7 @@ $result = $conn->query("SELECT * FROM ibadah_harian WHERE user_id = {$_SESSION['
         <div class="flex-1 p-6">
             <?php if (isset($message)) echo "<p class='mt-4 text-green-600'>$message</p>"; ?>
 
-            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
+            <a href="../index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
             <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Catat Jurnal Ramadhan</h2>
 
@@ -85,10 +85,10 @@ $result = $conn->query("SELECT * FROM ibadah_harian WHERE user_id = {$_SESSION['
                     </label>
                 </div>
 
-                <!-- Tadarus -->
-                <label class="block text-gray-700">
-                    Tadarus (halaman):
-                    <input type="number" name="tadarus" min="0" class="w-full p-2 border border-gray-300 rounded-md">
+                <!-- Tarawih -->
+                <label class="inline-flex items-center text-gray-700">
+                    <input type="checkbox" name="tarawih" class="form-checkbox">
+                    <span class="ml-2">Tarawih</span>
                 </label>
 
                 <!-- Puasa Checkbox -->

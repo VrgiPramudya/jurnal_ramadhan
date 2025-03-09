@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ashar = isset($_POST['ashar']) ? 1 : 0;
     $maghrib = isset($_POST['maghrib']) ? 1 : 0;
     $isya = isset($_POST['isya']) ? 1 : 0;
-    $tadarus = $_POST['tadarus'] ?? 0;
+    $tarawih = isset($_POST['tarawih']) ? 1 : 0;
     $puasa = isset($_POST['puasa']) ? 1 : 0;
     $catatan = $_POST['catatan'];
 
-    $sql = "UPDATE ibadah_harian SET tanggal = '$tanggal', subuh = $subuh, dzuhur = $dzuhur, ashar = $ashar, maghrib = $maghrib, isya = $isya, tadarus = $tadarus, puasa = $puasa, catatan = '$catatan' WHERE id = $id AND user_id = {$_SESSION['user_id']}";
+    $sql = "UPDATE ibadah_harian SET tanggal = '$tanggal', subuh = $subuh, dzuhur = $dzuhur, ashar = $ashar, maghrib = $maghrib, isya = $isya, tarawih = $tarawih, puasa = $puasa, catatan = '$catatan' WHERE id = $id AND user_id = {$_SESSION['user_id']}";
     if ($conn->query($sql)) {
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     } else {
         $message = "Error: " . $conn->error;
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Main Content -->
         <div class="flex-1 p-6">
-            <a href="index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
+            <a href="../index.php" class="text-blue-600 hover:text-blue-800 mb-4 inline-block">&larr; Kembali</a>
 
             <h2 class="text-2xl font-semibold mt-6 mb-4 text-gray-800">Edit Jurnal Ramadhan</h2>
 
@@ -88,8 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <!-- Tadarus Input -->
-                <label class="block text-gray-700">Tadarus (halaman): 
-                    <input type="number" name="tadarus" min="0" value="<?= htmlspecialchars($record['tadarus']) ?>" class="w-full p-2 border border-gray-300 rounded-md">
+                <label class="inline-flex items-center text-gray-700">
+                    <input type="checkbox" name="tarawih" <?= $record['tarawih'] ? 'checked' : '' ?> class="form-checkbox">
+                    <span class="ml-2">Tarawih</span>
                 </label>
 
                 <!-- Puasa Checkbox -->

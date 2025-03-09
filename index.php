@@ -1,12 +1,12 @@
 <?php
-require_once '../config/connection.php';
+require_once './config/connection.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../auth/login.php'); 
+    header('Location: ./auth/login.php'); 
     exit;
 }
 
@@ -21,7 +21,7 @@ $total_sholat_maghrib = 0;
 $total_sholat_isya = 0;
 
 $total_puasa = 0;
-$total_tadarus = 0;
+$total_tarawih = 0;
 $total_hari = 0;
 
 $journals = []; // Simpan data jurnal dalam array
@@ -34,7 +34,7 @@ while ($row = $result->fetch_assoc()) {
     $total_sholat_maghrib += $row['maghrib'];
     $total_sholat_isya += $row['isya'];
     $total_puasa += $row['puasa'];
-    $total_tadarus += $row['tadarus'];
+    $total_tarawih += $row['tarawih'];
 }
 
 ?>
@@ -53,8 +53,8 @@ while ($row = $result->fetch_assoc()) {
         <div class="w-64 bg-gray-800 text-white p-6">
             <h1 class="text-2xl font-semibold mb-6">Jurnal Ramadhan</h1>
             <div class="space-y-4">
-                <a href="tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
-                <a href="logout.php" class="block text-gray-300 hover:text-white">Logout</a>
+                <a href="./pages/tambah_jurnal.php" class="block text-gray-300 hover:text-white">Tambah Jurnal</a>
+                <a href="./auth/logout.php" class="block text-gray-300 hover:text-white">Logout</a>
             </div>
         </div>
 
@@ -95,8 +95,8 @@ while ($row = $result->fetch_assoc()) {
                     <p class="text-3xl font-bold text-gray-900"><?= $total_puasa ?></p>
                 </div>
                 <div class="bg-white p-6 shadow rounded-lg">
-                    <h2 class="text-lg font-semibold text-gray-700">Tadarus</h2>
-                    <p class="text-3xl font-bold text-gray-900"><?= $total_tadarus ?> halaman</p>
+                    <h2 class="text-lg font-semibold text-gray-700">Tarawih</h2>
+                    <p class="text-3xl font-bold text-gray-900"><?= $total_tarawih ?></p>
                 </div>
             </div>
 
@@ -105,35 +105,37 @@ while ($row = $result->fetch_assoc()) {
             <table class="min-w-full bg-white border border-gray-200 rounded-md shadow-md">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Tanggal</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Subuh</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Dzuhur</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Ashar</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Maghrib</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Isya</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Tadarus</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Puasa</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Catatan</th>
-                        <th class="px-4 py-2 border-b text-left text-gray-600">Aksi</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Tanggal</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Subuh</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Dzuhur</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Ashar</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Maghrib</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Isya</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Tarawih</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Puasa</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Catatan</th>
+                        <th class="px-4 py-2 border-b text-center text-gray-600">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($journals as $row): ?>
                     <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['tanggal']) ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['subuh'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['dzuhur'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['ashar'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['maghrib'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['tadarus']) ?></td>
-                        <td class="px-4 py-2 border-b"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
-                        <td class="px-4 py-2 border-b"><?= htmlspecialchars($row['catatan']) ?></td>
-                        <td class="px-4 py-2 border-b">
-                            <a href="edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
+                        <td class="px-4 py-2 border-b text-center" ><?= htmlspecialchars($row['tanggal']) ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['subuh'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['dzuhur'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['ashar'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['maghrib'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['isya'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['tarawih'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-center"><?= $row['puasa'] ? 'Ya' : 'Tidak' ?></td>
+                        <td class="px-4 py-2 border-b text-left" title="<?= htmlspecialchars($row['catatan']) ?>">
+                            <?= strlen($row['catatan']) > 20 ? htmlspecialchars(substr($row['catatan'], 0, 20)) . '...' : htmlspecialchars($row['catatan']) ?>
+                        </td>
+                        <td class="px-4 py-2 border-b text-center">
+                            <a href="./pages/edit_jurnal.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 mr-4">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="delete_jurnal.php?delete_id=<?= $row['id'] ?>" onclick="return confirm('Yakin ingin menghapus?');" class="text-red-600 hover:text-red-800">
+                            <a href="./pages/delete_jurnal.php?delete_id=<?= $row['id'] ?>" onclick="return confirm('Yakin ingin menghapus?');" class="text-red-600 hover:text-red-800">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
